@@ -12,23 +12,28 @@
     }
 
     body {
-      height: 100vh;
+      min-height: 100vh;
       width: 100vw;
       overflow: hidden;
       background: radial-gradient(circle at center, #0a0a0a, #000);
       font-family: "Poppins", sans-serif;
       color: white;
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Top Text Section */
+    /* Animated top text */
     .top-text {
       text-align: center;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease-in-out;
+      margin-bottom: 18px;
+      animation: fadeFloat 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes fadeFloat {
+      0% { opacity: 0.85; transform: translateY(0); }
+      100% { opacity: 1; transform: translateY(-6px); }
     }
 
     .verified {
@@ -61,34 +66,34 @@
       letter-spacing: 0.4px;
     }
 
-    /* Video Box */
+    /* Video box */
     .video-box {
       position: relative;
       width: 90%;
       max-width: 600px;
-      aspect-ratio: 16 / 9;
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 0 60px rgba(255, 0, 128, 0.3),
-                  0 0 120px rgba(255, 0, 128, 0.1);
+                  0 0 120px rgba(255, 0, 128, 0.15);
       background: #111;
-      transform: perspective(800px) rotateX(4deg);
+      transform: perspective(800px) rotateX(3deg);
       animation: popIn 1.5s ease-in-out;
     }
 
     @keyframes popIn {
       from { transform: scale(0.8) rotateX(15deg); opacity: 0; }
-      to { transform: scale(1) rotateX(4deg); opacity: 1; }
+      to { transform: scale(1) rotateX(3deg); opacity: 1; }
     }
 
     video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      filter: brightness(0.8);
+      object-fit: contain; /* full video visible */
+      display: block;
+      background-color: black;
     }
 
-    /* Profile Button over video */
+    /* Profile button over video */
     .profile-btn {
       position: absolute;
       bottom: 10%;
@@ -104,20 +109,26 @@
       box-shadow: 0 0 20px rgba(255, 0, 128, 0.4);
       transition: all 0.3s ease;
       z-index: 2;
+      animation: pulse 2s infinite;
     }
 
     .profile-btn:hover {
-      transform: translateX(-50%) scale(1.05);
+      transform: translateX(-50%) scale(1.08);
       box-shadow: 0 0 40px rgba(255, 0, 128, 0.7);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 128, 0.4); }
+      50% { box-shadow: 0 0 35px rgba(255, 0, 128, 0.7); }
     }
 
     /* Trusted Footer */
     .trusted {
-      margin-top: 35px;
+      margin-top: 25px;
       font-size: 0.9em;
       color: #bbb;
       letter-spacing: 0.3px;
-      opacity: 0.7;
+      opacity: 0.75;
       text-align: center;
       animation: fadeIn 2s ease-in-out;
     }
@@ -125,6 +136,17 @@
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .name {
+        font-size: 1.9em;
+      }
+      .profile-btn {
+        font-size: 1em;
+        padding: 10px 24px;
+      }
     }
   </style>
 </head>
@@ -138,6 +160,7 @@
   <div class="video-box">
     <video autoplay muted loop playsinline>
       <source src="2dvideo.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
     </video>
     <a href="https://cghhicb.dateslocal.com/s/5f4386a55e131?sub1=msazu121" class="profile-btn" target="_blank">View My Profile — Free 💖</a>
   </div>
